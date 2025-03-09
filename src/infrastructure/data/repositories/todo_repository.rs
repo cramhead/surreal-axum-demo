@@ -1,7 +1,6 @@
 use crate::domain::models::todo::Todo;
 use crate::infrastructure::data::db_context::surreal_context::DB;
 use surrealdb::{Error, error::Db::Thrown};
-use tracing::info;
 
 #[derive(Debug)]
 pub struct TodoRepository {

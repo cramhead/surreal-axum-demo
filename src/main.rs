@@ -2,7 +2,6 @@ use axum::http::{
     HeaderValue, Method,
     header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
 };
-use surrealdb::{Surreal, engine::remote::ws::Ws, opt::auth::Root};
 use surrealdb_axum_demo::api::router::create_router;
 use surrealdb_axum_demo::infrastructure::data::db_context::surreal_context::connect_db;
 use tower_http::cors::CorsLayer;

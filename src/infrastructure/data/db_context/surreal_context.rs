@@ -1,17 +1,15 @@
-use std::sync::LazyLock;
+use std::{sync::LazyLock, time::Duration};
 
-// use once_cell::sync::Lazy;
 use surrealdb::{
-    Result, Surreal,
-    engine::remote::ws::{Client, Ws},
-    opt::auth::Root,
+    engine::remote::ws::{Client, Ws}, opt::{auth::Root, Config}, Result, Surreal
 };
 
-// pub static DB: Lazy<Surreal<Client>> = Lazy::new(Surreal::init);
 pub static DB: LazyLock<Surreal<Client>> = LazyLock::new(Surreal::init);
 
 pub async fn connect_db() -> Result<()> {
-    let _ = DB.connect::<Ws>("127.0.0.1:8000").await?;
+
+let config = Config::default().query_timeout(Duration::from_millis(30000));
+    let _ = DB.connect::<Ws>((format!("{}:{}", "127.0.0.1", 8000), config)).await?;
     let _ = DB
         .signin(Root {
             username: "root",
@@ -20,16 +18,17 @@ pub async fn connect_db() -> Result<()> {
         .await;
     let _ = DB.use_ns("todo").use_db("todo").await?;
 
-    let some_queries = DB
-        .query(
-            "
-        RETURN 9; 
-        RETURN 10; 
-        SELECT * FROM { is: 'Nice database' };
-    ",
-        )
-        .await?;
-    dbg!(some_queries);
+    // check db is live
+    // let some_queries = DB
+    //     .query(
+    //         "
+    //     RETURN 9; 
+    //     RETURN 10; 
+    //     SELECT * FROM { is: 'Nice database' };
+    // ",
+    //     )
+    //     .await?;
+    // dbg!(some_queries);
 
     Ok(())
 }
