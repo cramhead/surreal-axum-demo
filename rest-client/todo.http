@@ -1,0 +1,30 @@
+# Todo Routes
+
+### Get all todos
+GET http://localhost:8080/api/todos
+
+### Get todo by id
+GET http://localhost:8080/api/todos/ed25vlkiqnbihi40wh8o
+
+### Create a todo
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "Buy milk",
+  "content": "Buy milk from the store",
+  "completed": false
+}
+
+### Update a todo
+PUT http://localhost:8080/api/todos/ed25vlkiqnbihi40wh8o
+Content-Type: application/json
+
+{
+  "title": "7 Buy milk",
+  "content": "Buy milk from the store",
+  "completed": true
+}
+
+### Delete a todo
+DELETE http://localhost:8080/api/todos/ed25vlkiqnbihi40wh8o
