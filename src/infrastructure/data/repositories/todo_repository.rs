@@ -6,6 +6,11 @@ use surrealdb::{Error, error::Db::Thrown};
 pub struct TodoRepository {
     table: String,
 }
+impl Default for TodoRepository {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 impl TodoRepository {
     pub fn new() -> Self {
@@ -44,10 +49,10 @@ impl TodoRepository {
 
     #[tracing::instrument(ret)]
     pub async fn create_todo(&self, content: Todo) -> Result<Todo, Error> {
-        if let Some(record) = DB.create(&self.table).content(content).await?{
+        if let Some(record) = DB.create(&self.table).content(content).await? {
             return Ok(record);
         }
-        let error = Error::Db(Thrown(format!("Todo could not be created")));
+        let error = Error::Db(Thrown("Todo could not be created".to_string()));
         Err(error)
     }
 

@@ -1,5 +1,3 @@
-
-
 use axum::{Json, http::StatusCode, response::IntoResponse};
 use chrono::Local;
 use tracing::info;
@@ -12,7 +10,6 @@ use crate::{
 pub async fn create_todo_command(
     Json(mut body): Json<Todo>,
 ) -> Result<impl IntoResponse, (StatusCode, Json<serde_json::Value>)> {
-
     let repository = TodoRepository::new();
 
     if let Ok(todo) = repository.get_by_title(body.title.clone()).await {
@@ -33,8 +30,6 @@ pub async fn create_todo_command(
 
         match repository.create_todo(todo.clone()).await {
             Ok(todo) => {
-                
-                info!("Todo created");
                 info!("The database created todo: {:?}", todo);
                 let json_response = serde_json::json!({
                     "status": "success",

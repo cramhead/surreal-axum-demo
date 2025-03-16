@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use surrealdb::sql::Thing;
 
 #[allow(non_snake_case)]
-#[derive(Debug, Deserialize, Serialize,Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Todo {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<Thing>,

@@ -1,4 +1,4 @@
-use axum::{extract::Path, http::StatusCode, response::IntoResponse, Json};
+use axum::{Json, extract::Path, http::StatusCode, response::IntoResponse};
 
 use crate::infrastructure::data::repositories::todo_repository::TodoRepository;
 
@@ -8,7 +8,7 @@ pub async fn delete_todo_command(
     let repository = TodoRepository::new();
     let id = id.to_string();
 
-    if let Ok(_) = repository.get_by_id(id.clone()).await {
+    if repository.get_by_id(id.clone()).await.is_ok() {
         let _ = repository.delete_todo(id.clone()).await.unwrap();
 
         return Ok(StatusCode::NO_CONTENT);

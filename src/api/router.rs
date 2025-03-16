@@ -3,10 +3,15 @@ use axum::{
     routing::{get, post},
 };
 
-
-
-use crate::application::{commands::{create_todo_command::create_todo_command, update_todo_command::update_todo_command, delete_todo_command::delete_todo_command}, queries::{get_all_todos_query::get_all_todos_query, get_todo_by_id_query::get_todo_by_id_query}};
-
+use crate::application::{
+    commands::{
+        create_todo_command::create_todo_command, delete_todo_command::delete_todo_command,
+        update_todo_command::update_todo_command,
+    },
+    queries::{
+        get_all_todos_query::get_all_todos_query, get_todo_by_id_query::get_todo_by_id_query,
+    },
+};
 
 use super::health_checker_handler;
 

@@ -1,7 +1,9 @@
-use axum::{extract::Path, http::StatusCode, response::IntoResponse, Json};
+use axum::{Json, extract::Path, http::StatusCode, response::IntoResponse};
 use chrono::Local;
 
-use crate::{domain::models::todo::Todo, infrastructure::data::repositories::todo_repository::TodoRepository};
+use crate::{
+    domain::models::todo::Todo, infrastructure::data::repositories::todo_repository::TodoRepository,
+};
 
 use super::requests::update_todo_request::UpdateTodoRequest;
 
@@ -34,7 +36,7 @@ pub async fn update_todo_command(
                 updatedAt: Some(datetime),
             };
 
-            let todo_response = repository.update_todo( id, payload).await.unwrap();
+            let todo_response = repository.update_todo(id, payload).await.unwrap();
 
             let json_response = serde_json::json!({
                 "status": "success",

@@ -1,6 +1,8 @@
-use axum::{response::IntoResponse, Json};
+use axum::{Json, response::IntoResponse};
 
-use crate::{domain::models::todo::Todo, infrastructure::data::repositories::todo_repository::TodoRepository};
+use crate::{
+    domain::models::todo::Todo, infrastructure::data::repositories::todo_repository::TodoRepository,
+};
 
 pub async fn get_all_todos_query() -> impl IntoResponse {
     let repository = TodoRepository::new();

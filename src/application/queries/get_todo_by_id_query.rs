@@ -1,4 +1,4 @@
-use axum::{extract::Path, http::StatusCode, response::IntoResponse, Json};
+use axum::{Json, extract::Path, http::StatusCode, response::IntoResponse};
 
 use crate::infrastructure::data::repositories::todo_repository::TodoRepository;
 
@@ -10,5 +10,5 @@ pub async fn get_todo_by_id_query(
 
     let todo = repository.get_by_id(id).await;
 
-    return Ok((StatusCode::OK, Json(todo)));
+    Ok((StatusCode::OK, Json(todo)))
 }
