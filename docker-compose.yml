@@ -2,13 +2,13 @@ services:
   surrealdb:
     env_file:
       - .env
-    entrypoint: 
-      - /surreal 
-      - start 
+    entrypoint:
+      - /surreal
+      - start
       - --user
-      - $DB_USER
+      - $username
       - --pass
-      - $DB_PASSWORD
+      - $password
     image: surrealdb/surrealdb:latest
     ports:
       - 8000:8000
